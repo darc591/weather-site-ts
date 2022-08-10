@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-
+import { useSelector } from "react-redux";
+import { selectActualData } from "../ducks/actualDataSlice";
 const StyledForecast = styled.div`
   grid-area: 2 / 1 / 5 / 1;
   display: flex;
@@ -25,6 +26,7 @@ const StyledImg = styled.img`
   align-self: center;
 `;
 function Forecast() {
+  const actualData = useSelector(selectActualData)
   return (
     <StyledForecast>
       <StyledImg src="https://openweathermap.org/img/wn/13d@4x.png" />
@@ -32,7 +34,7 @@ function Forecast() {
       <div></div>
       <span>Monday, 16:00</span>
       <span>Mostly Cloudy Rain - 30%</span>
-      <h1>New York</h1>
+      <h1>{actualData.data.name}</h1>
     </StyledForecast>
   );
 }
