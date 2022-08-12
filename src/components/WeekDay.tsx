@@ -19,11 +19,11 @@ const StyledWeekDay = styled.div`
       gap: 5px;
     }
 
-    & div span{
+    & div h3{
       font-size: 0.9rem;
     }
 
-    & span.min{
+    & h3.min{
       color: #999;
     }
   `;
@@ -40,11 +40,11 @@ const WeekDay = ({weekDay} :{weekDay: WeekDayData[]}) => {
   
   return (
     <StyledWeekDay>
-      <span>{formatTime(weekDay[0].dt, TimeFormatType.ShortDay)}</span>
-      <img style={{width: '45px'}} src={`https://openweathermap.org/img/wn/${weekDay[Math.floor(weekDay.length/2)].weather[0].icon}@4x.png`} alt='icon'/>
+      <h2>{formatTime(weekDay[0].dt, TimeFormatType.ShortDay)}</h2>
+      <img style={{width: '60px'}} src={`https://openweathermap.org/img/wn/${weekDay[Math.floor(weekDay.length/2)].weather[0].icon}@4x.png`} alt='icon'/>
       <div>
-        <span>{maxTemp}°</span>
-        <span className='min'>{minTemp}°</span>
+        <h3>{maxTemp}°</h3>
+        <h3 className='min'>{minTemp}°</h3>
       </div>
     </StyledWeekDay>
   )

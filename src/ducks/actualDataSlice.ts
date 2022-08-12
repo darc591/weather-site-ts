@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk} from "@reduxjs/toolkit";
 import axios from "axios";
 import type { ActualWeatherData } from "../types/types";
+import { celsiusToFahrenheit, fahrenheitToCelsius } from "../util/metricFuncions";
 
 interface ActualData {
   data: ActualWeatherData,
@@ -73,7 +74,25 @@ const actualDataSlice = createSlice({
     name: 'actualData',
     initialState: initialState,
     reducers: {
-        addActualData: (state,action) => action.payload
+        addActualData: (state,action) => action.payload,
+
+        changeActualMetrics: (state, action) => {
+          if(state.metrics === action.payload) return
+          state.metrics = action.payload;
+          if(action.payload === 'F'){
+            state.data.main.temp = celsiusToFahrenheit(state.data.main.temp)
+            state.data.main.temp_max = celsiusToFahrenheit(state.data.main.temp_max)
+            state.data.main.temp_min = celsiusToFahrenheit(state.data.main.temp_min)
+            state.data.main.feels_like = celsiusToFahrenheit(state.data.main.feels_like)
+          }
+          if(action.payload === 'C'){
+            state.data.main.temp = fahrenheitToCelsius(state.data.main.temp)
+            state.data.main.temp_max = fahrenheitToCelsius(state.data.main.temp_max)
+            state.data.main.temp_min = fahrenheitToCelsius(state.data.main.temp_min)
+            state.data.main.feels_like = fahrenheitToCelsius(state.data.main.feels_like)
+          }
+        }
+
     },
     extraReducers: {
         'actualData/fetchActualWeather/pending': (state, action) => {
@@ -82,6 +101,7 @@ const actualDataSlice = createSlice({
         },
         'actualData/fetchActualWeather/fulfilled': (state, action) => {
             state.data = action.payload;
+            state.metrics = 'C';
             state.isLoading = false;
             state.hasError = false;
         },
@@ -94,6 +114,6 @@ const actualDataSlice = createSlice({
 })
 
 export const selectIsLoading = (state : {actualData: ActualData}) => state.actualData.isLoading;
-export const selectActualData = (state : {actualData : ActualData}) => state.actualData.data;
-
+export const selectActualData = (state : {actualData : ActualData}) => state.actualData;
+export const {changeActualMetrics} =  actualDataSlice.actions; 
 export const actualDataReducer = actualDataSlice.reducer;

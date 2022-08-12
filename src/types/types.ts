@@ -28,6 +28,9 @@ export interface ActualWeatherData {
         deg: number,
         gust: number
     },
+    rain?:{
+        '1h': number 
+    }
     clouds: {
         all: number
     },

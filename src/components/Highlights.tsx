@@ -1,7 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import HlCard from "./HlCard";
-
+import WindCard from "./cards/WindCard";
+import PressureCard from "./cards/PressureCard";
+import HumidityCard from "./cards/HumidityCard";
+import RainCard from "./cards/RainCard";
+import SunsetCard from "./cards/SunsetCard";
 const StyledHighlights = styled.div`
   grid-area: 3 / 2 / 5 / 5;
   display: grid;
@@ -12,16 +15,18 @@ const StyledHighlights = styled.div`
     margin-top: 0;
   }
 `;
+
+
+
 function Highlights() {
   return (
     <StyledHighlights>
-      <h2>Today's Highlights</h2>
-      <HlCard />
-      <HlCard />
-      <HlCard />
-      <HlCard />
-      <HlCard />
-      <HlCard />
+      <h2>Destaques de hoje</h2>
+      <SunsetCard/>
+      <WindCard />
+      <PressureCard/>
+      <HumidityCard/>
+      <RainCard/> 
     </StyledHighlights>
   );
 }

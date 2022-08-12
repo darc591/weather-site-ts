@@ -38,12 +38,13 @@ function Forecast() {
   const weather = useSelector(selectActualData)
   return (
     <StyledForecast>
-      <StyledImg src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}@4x.png`} />
-      <h1>{Math.floor(weather.main.temp)} C°</h1>
+      <StyledImg src={`https://openweathermap.org/img/wn/${weather.data.weather[0].icon}@4x.png`} />
+      <h1>{Math.floor(weather.data.main.temp)}{weather.metrics}°</h1>
+      <span>{weather.data.weather[0].description}</span>
+      <span>Sensação <strong>{Math.floor(weather.data.main.feels_like)}{weather.metrics}°</strong></span>
       <div className="line"></div>
-      <div className="time">{formatTime(weather.dt, TimeFormatType.DayTime)}</div>
-      <span>{weather.weather[0].description}</span>
-      <h1>{weather.name}</h1>
+      <div className="time">{formatTime(weather.data.dt, TimeFormatType.DayTime)}</div>
+      <h1>{weather.data.name}</h1>
     </StyledForecast>
   );
 }

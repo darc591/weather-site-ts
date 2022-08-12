@@ -1,6 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-
+import { useDispatch } from "react-redux";
+import { changeActualMetrics } from "../ducks/actualDataSlice";
+import { AppDispatch } from "../ducks/store";
+import { changeWeekMetrics } from "../ducks/weekDataSlice";
+import { useSelector } from "react-redux";
+import { selectActualData } from "../ducks/actualDataSlice";
 const Container = styled.div`
   display: flex;
   justify-content: center;
@@ -23,10 +28,16 @@ const StyledButton = styled.button`
   }
 `;
 function Metric() {
+  const dispatch :  AppDispatch = useDispatch()
+  const {metrics} = useSelector(selectActualData)
+  const handleClick = (metric : string) => {
+    dispatch(changeActualMetrics(metric))
+    dispatch(changeWeekMetrics(metric))
+  }
   return (
     <Container>
-      <StyledButton>C°</StyledButton>
-      <StyledButton>F°</StyledButton>
+      <StyledButton style={metrics === 'C' ? {background: '#999'} : {background: 'white'}} onClick={()=> handleClick('C')}>C°</StyledButton>
+      <StyledButton style={metrics === 'F' ? {background: '#999'} : {background: 'white'}}onClick={()=> handleClick('F')}>F°</StyledButton>
     </Container>
   );
 }

@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { WeekWeatherData } from "../types/types";
+import { celsiusToFahrenheit, fahrenheitToCelsius } from "../util/metricFuncions";
 
 export const fetchWeekWeather = createAsyncThunk(
     'weekData/fetchWeekWeather',
@@ -1516,7 +1517,26 @@ const weekDataSlice = createSlice({
     name: 'weekData',
     initialState: initialState,
     reducers: {
-        addWeekData: (state,action) => action.payload
+        addWeekData: (state,action) => action.payload,
+
+        changeWeekMetrics: (state, action) => {
+          if(state.metrics === action.payload) return
+          state.metrics = action.payload
+          if(action.payload === 'C'){
+            state.data.list.forEach(day => {
+              day.main.temp = fahrenheitToCelsius(day.main.temp)
+              day.main.temp_min = fahrenheitToCelsius(day.main.temp_min)
+              day.main.temp_max = fahrenheitToCelsius(day.main.temp_max)
+            })
+          }
+          if(action.payload === 'F'){
+            state.data.list.forEach(day => {
+              day.main.temp = celsiusToFahrenheit(day.main.temp)
+              day.main.temp_min = celsiusToFahrenheit(day.main.temp_min)
+              day.main.temp_max = celsiusToFahrenheit(day.main.temp_max)
+            })
+          }
+        }
     },
     extraReducers: {
         'weekData/fetchWeekWeather/pending': (state, action) => {
@@ -1525,6 +1545,7 @@ const weekDataSlice = createSlice({
         },
         'weekData/fetchWeekWeather/fulfilled': (state, action) => {
             state.data = action.payload;
+            state.metrics = 'C';
             state.isLoading = false;
             state.hasError = false;
         },
@@ -1537,6 +1558,6 @@ const weekDataSlice = createSlice({
     
 })
 
-
+export const {changeWeekMetrics} = weekDataSlice.actions;
 export const selectWeekData = (state :  {weekData: WeekWeatherData}) => state.weekData.data;
 export const weekDataReducer = weekDataSlice.reducer;
