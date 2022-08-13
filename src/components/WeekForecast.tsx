@@ -43,12 +43,12 @@ const sortDays = (days : WeekDayData[][] ) => {
 }
 function WeekForecast() {
   const weekData = useSelector(selectWeekData)
-  const groupedData : WeekDayData[][] = sortDays(groupWeekDays(weekData.list))
-  
+  const groupedData : WeekDayData[][] = sortDays(groupWeekDays(weekData.data.list))
+  const {isLoading} = weekData;
   return (
     <StyledWeekForecast>
       {groupedData.map((day, index) => (
-        <WeekDay key={index} weekDay={day}/>
+        <WeekDay key={index} weekDay={day} isLoading={isLoading}/>
       ))}
     </StyledWeekForecast>
   );

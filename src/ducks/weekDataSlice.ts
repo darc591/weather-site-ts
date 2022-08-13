@@ -6,7 +6,7 @@ import { celsiusToFahrenheit, fahrenheitToCelsius } from "../util/metricFuncions
 export const fetchWeekWeather = createAsyncThunk(
     'weekData/fetchWeekWeather',
     async (city: string, thunkAPI) => {
-        const coords = await axios.get(`http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=cd1af5f7db36fcfe5990524757daff37`)
+        const coords = await axios.get(`https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=cd1af5f7db36fcfe5990524757daff37`)
         const response = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=${coords.data[0].lat}&lon=${coords.data[0].lon}&appid=cd1af5f7db36fcfe5990524757daff37&units=metric&lang=pt_br`)
         return response.data;
     }
@@ -1559,5 +1559,5 @@ const weekDataSlice = createSlice({
 })
 
 export const {changeWeekMetrics} = weekDataSlice.actions;
-export const selectWeekData = (state :  {weekData: WeekWeatherData}) => state.weekData.data;
+export const selectWeekData = (state :  {weekData: WeekWeatherData}) => state.weekData;
 export const weekDataReducer = weekDataSlice.reducer;

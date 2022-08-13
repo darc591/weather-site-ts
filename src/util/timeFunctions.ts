@@ -14,13 +14,10 @@ export const formatTime = (unixTime : number, formatType : TimeFormatType) => {
     switch(formatType){
         case TimeFormatType.Day:
             return weekday[date.getDay()]
-            break
         case TimeFormatType.DayTime:
             return `${weekday[date.getDay()]}, ${date.getHours()}:${date.getMinutes()=== 0 ? '00' : date.getMinutes()}`
-            break
         case TimeFormatType.Time:
             return `${date.getHours() < 10 ? `0${date.getHours()}` : date.getHours()}:${date.getMinutes() < 10 ? `0${date.getMinutes()}` : date.getMinutes()}`
-            break
         case TimeFormatType.ShortDay:
             return `${weekday[date.getDay()].slice(0,3)}`
         

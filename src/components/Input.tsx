@@ -25,10 +25,20 @@ function Input() {
     }
     setTerm('')
   }
+
+  const hadleKeyPress = (e : any) => {
+    if(e.key === 'Enter'){
+      if(term.length > 0){
+        dispatch(fetchActualWeather(term))
+        dispatch(fetchWeekWeather(term))  
+      }
+      setTerm('')
+    }
+  }
   return (
     <div style={{display: 'flex' , justifyContent: 'center', alignItems: 'center'}}>
       <SearchOutline onClick={(e)=> handleClick(e)} style={{position: 'relative', left: '35px', cursor: 'pointer'}}/>
-      <StyledInput value={term} placeholder="Procurar por lugares..." onChange={(e) => setTerm(e.target.value)}/>
+      <StyledInput value={term} placeholder="Procurar por lugares..." onChange={(e) => setTerm(e.target.value)} onKeyDown={(e)=> hadleKeyPress(e)}/>
       <LocationMarkerOutline style={{position: 'relative', right: '35px', cursor: 'pointer'}}/>
     </div>
   );
