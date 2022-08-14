@@ -16,13 +16,21 @@ export const Wrapper = styled.div`
 export const Container = styled.div`
     width: 100%;
     height: 100vh;
-    background: linear-gradient(to top right,#669fdf, #c2dffd);
     background-repeat: no-repeat;
     background-size: auto;
     display: flex;
     justify-content: center;
     align-items: center;
     font-family: 'poppins', sans-serif;
+
+    &.day{
+        background: linear-gradient(177deg, #64adc9 0%, #717bcf 100%);
+
+    }
+    &.night{
+        background: linear-gradient(177deg, #070c53 0%, #45452b 100%);
+
+    }
   `;
 
 

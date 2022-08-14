@@ -11,7 +11,13 @@ export const fetchWeekWeather = createAsyncThunk(
         return response.data;
     }
 )
-
+export const fetchWeekWeatherByLocation = createAsyncThunk(
+  'weekData/fetchWeekWeather',
+  async (coords : {latitude: number, longitude: number}, thunkAPI) => {
+    const response = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=${coords.latitude}&lon=${coords.longitude}&appid=cd1af5f7db36fcfe5990524757daff37&units=metric&lang=pt_br`)
+    return response.data
+  }
+)
 const initialState : WeekWeatherData= {
   data:
   {
@@ -1507,7 +1513,7 @@ const initialState : WeekWeatherData= {
         "sunset": 1660251850
       }
   },
-  isLoading: false,
+  isLoading: true,
   hasError: false,
   metrics: 'C'
 }

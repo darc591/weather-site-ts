@@ -44,7 +44,7 @@ function Forecast() {
       <span>Sensação <strong>{Math.floor(weather.data.main.feels_like)}{weather.metrics}°</strong></span></>
       }
       <div className="line"></div>
-      {isLoading ? <><Skeleton width={230} height={50}/><Skeleton height={70}/></> : <><div className="time">{formatTime(weather.data.dt, TimeFormatType.DayTime)}</div>
+      {isLoading ? <><Skeleton width={230} height={50}/><Skeleton height={70}/></> : <><div className="time">{formatTime(weather.data.dt, weather.data.timezone, TimeFormatType.DayTime)}</div>
       <h1>{weather.data.name}</h1></>
       }
     </StyledForecast>

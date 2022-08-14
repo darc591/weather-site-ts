@@ -10,8 +10,8 @@ function SunsetCard() {
   return (
     <Card style={{gridArea: '2 / 1 / 2 / 3', width: '360px'}}>
           <div style={{display: 'flex'}}>
-          <h3 style={{marginRight: '40px'}}>Nascer do sol {formatTime(weather.data.sys.sunrise, TimeFormatType.Time)}</h3>
-          <h3>Pôr do sol {formatTime(weather.data.sys.sunset, TimeFormatType.Time)}</h3>
+          <h3 style={{marginRight: '40px'}}>Nascer do sol {formatTime(weather.data.sys.sunrise,weather.data.timezone, TimeFormatType.Time)}</h3>
+          <h3>Pôr do sol {formatTime(weather.data.sys.sunset, weather.data.timezone, TimeFormatType.Time)}</h3>
           </div>
     
     </Card>

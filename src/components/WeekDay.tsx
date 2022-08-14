@@ -41,7 +41,7 @@ const WeekDay = ({weekDay, isLoading} :{weekDay: WeekDayData[], isLoading: boole
   const minTemp = Math.floor(Math.min(...weekDay.map(day => day.main.temp_min)))
   return (
     <StyledWeekDay>
-      {isLoading ? <Skeleton width={60} height={25}/> : <h2>{formatTime(weekDay[0].dt, TimeFormatType.ShortDay)}</h2>}
+      {isLoading ? <Skeleton width={60} height={25}/> : <h2>{formatTime(weekDay[0].dt,0, TimeFormatType.ShortDay)}</h2>}
       {isLoading ? <Skeleton circle width={35} height={35}/> : <img style={{width: '60px'}} src={`https://openweathermap.org/img/wn/${weekDay[Math.floor(weekDay.length/2)].weather[0].icon}@4x.png`} alt='icon'/>}
       {isLoading ? <Skeleton width={60}/> : 
       <>

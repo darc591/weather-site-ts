@@ -11,7 +11,7 @@ interface ActualData {
 
 }
 
-export const fetchActualWeather = createAsyncThunk(
+export const fetchActualWeatherByName = createAsyncThunk(
     'actualData/fetchActualWeather',
     async (city: string, thunkAPI) => {
         const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=cd1af5f7db36fcfe5990524757daff37&units=metric&lang=pt_br`)
@@ -19,53 +19,61 @@ export const fetchActualWeather = createAsyncThunk(
     }
 )
 
+export const fetchActualWeatherByLocation = createAsyncThunk(
+  'actualData/fetchActualWeather',
+  async (coords : {latitude: number, longitude: number}, thunkAPI) => {
+    const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${coords.latitude}&lon=${coords.longitude}&appid=cd1af5f7db36fcfe5990524757daff37&units=metric&lang=pt_br`)
+    return response.data
+  }
+)
+
 const initialState : ActualData = {
   data: {
       "coord": {
-          "lon": -52.2,
-          "lat": -28.4492
+          "lon": 0,
+          "lat": 0
         },
         "weather": [
           {
-            "id": 800,
-            "main": "Clear",
-            "description": "céu limpo",
-            "icon": "01d"
+            "id": 0,
+            "main": "",
+            "description": "",
+            "icon": ""
           }
         ],
         "base": "stations",
         "main": {
-          "temp": 14.69,
-          "feels_like": 13.99,
-          "temp_min": 14.69,
-          "temp_max": 14.69,
-          "pressure": 1024,
-          "humidity": 68,
-          "sea_level": 1024,
-          "grnd_level": 960
+          "temp": 0,
+          "feels_like": 0,
+          "temp_min": 0,
+          "temp_max": 0,
+          "pressure": 0,
+          "humidity": 0,
+          "sea_level": 0,
+          "grnd_level": 0
         },
-        "visibility": 10000,
+        "visibility": 0,
         "wind": {
-          "speed": 2.99,
-          "deg": 87,
-          "gust": 4.53
+          "speed": 0,
+          "deg": 0,
+          "gust": 0
         },
         "clouds": {
           "all": 0
         },
-        "dt": 1660229537,
+        "dt": 0,
         "sys": {
-          "country": "BR",
-          "sunrise": 1660212245,
-          "sunset": 1660251845
+          "country": "",
+          "sunrise": 0,
+          "sunset": 0
         },
-        "timezone": -10800,
-        "id": 3457817,
-        "name": "Marau",
-        "cod": 200
+        "timezone": 0,
+        "id": 0,
+        "name": "",
+        "cod": 0
         
   },
-  isLoading: false,
+  isLoading: true,
   hasError: false,
   metrics: 'C'
 }
@@ -102,8 +110,8 @@ const actualDataSlice = createSlice({
         'actualData/fetchActualWeather/fulfilled': (state, action) => {
             state.data = action.payload;
             state.metrics = 'C';
-            state.isLoading = false;
             state.hasError = false;
+            state.isLoading = false;
         },
         'actualData/fetchActualWeather/rejected': (state, action) => {
             state.isLoading = false;
