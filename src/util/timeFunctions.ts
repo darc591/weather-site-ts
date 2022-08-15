@@ -9,7 +9,7 @@ export enum TimeFormatType {
 
 const weekday = ["Domingo","Segunda-feira","Terça-feira","Quarta-feira","Quinta-feira","Sexta-feira","Sábado"];
 
-export const formatTime = (unixTime : number, timeZone: number, formatType : TimeFormatType) => {
+export const formatTime = (unixTime : number, timeZone: number, formatType : TimeFormatType) : any => {
     const offSet = (new Date().getTimezoneOffset() * 60 + timeZone);
     const date = new Date(((unixTime + offSet) * 1000));
     switch(formatType){

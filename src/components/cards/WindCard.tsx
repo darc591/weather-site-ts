@@ -10,8 +10,8 @@ const WindCard = () => {
   return (
     <Card>
         <h2>Vento</h2>
-        <PaperAirplane style={{scale: '1.25' ,fill: '#666', rotate: `${weather.data.wind.deg}deg`}}/>
-        <h2>{Math.floor(weather.data.wind.speed * 3.6)} Km/h</h2>
+        <PaperAirplane style={{scale: '1.6' ,fill: '#666', rotate: `${weather.data.wind.deg}deg`}}/>
+        <h3>{Math.floor(weather.data.wind.speed * 3.6)} Km/h</h3>
     </Card>
   )
 }

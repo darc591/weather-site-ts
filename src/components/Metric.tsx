@@ -20,12 +20,8 @@ const StyledButton = styled.button`
   background-color: white;
   color: black;
   font-size: larger;
-  font-weight: 500;
+  font-weight: 700;
   cursor: pointer;
-
-  &:hover {
-    background-color: #999;
-  }
 `;
 function Metric() {
   const dispatch :  AppDispatch = useDispatch()
@@ -36,8 +32,8 @@ function Metric() {
   }
   return (
     <Container>
-      <StyledButton style={metrics === 'C' ? {background: '#999'} : {background: 'white'}} onClick={()=> handleClick('C')}>C°</StyledButton>
-      <StyledButton style={metrics === 'F' ? {background: '#999'} : {background: 'white'}}onClick={()=> handleClick('F')}>F°</StyledButton>
+      <StyledButton style={metrics === 'C' ? {backgroundColor: '#99999991'} : {background: 'white'}} onClick={()=> handleClick('C')}>C°</StyledButton>
+      <StyledButton style={metrics === 'F' ? {backgroundColor: '#99999991'} : {background: 'white'}}onClick={()=> handleClick('F')}>F°</StyledButton>
     </Container>
   );
 }
